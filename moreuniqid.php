@@ -2,6 +2,7 @@
 /**
  * A unique-er version of uniqid. More random, more precise time, only one more char.
  * https://onlinephp.io/c/a8b2d
+ * @author Jack Dunn <https://github.com/JackDunnCodes>
  * @license MPL-2.0
  */
 function moreuniqid($pfx='') {
