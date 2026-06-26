@@ -5,6 +5,10 @@
  * @license MPL-2.0
  */
 function cookie(name) {
+    /**
+     * Get the value of this cookie
+     * @returns The cookie value
+     */
     function value() {
         let cookieString = decodeURIComponent(document.cookie);
         let cookies = cookieString.split(';');
@@ -17,6 +21,11 @@ function cookie(name) {
         }
         return undefined;
     }
+    /**
+     * Set the value of the cookie, with an optional timeout.
+     * @param {*} value 
+     * @param {number} seconds 
+     */
     function set(value, seconds = undefined) {
         if(seconds === undefined) {
             document.cookie = name + "=" + value+";path=/";
