@@ -5,6 +5,7 @@
  * @license MPL-2.0
  */
 function cookie(name) {
+  let docCookie = (value) => {return document.cookie=value}
     /**
      * Get the value of this cookie
      * @returns The cookie value
@@ -26,19 +27,15 @@ function cookie(name) {
      * @param {*} value 
      * @param {number} seconds 
      */
-    function set(value, seconds = undefined) {
+    function set(value, seconds = null) {
         const nvp =name + "=" + value+ ";path=/";
-        if(seconds === undefined) {
-            document.cookie = nvp ;
+        if(seconds === null) {
+            docCookie(nvp);
         } else {
             const d = new Date();
             d.setTime(d.getTime() + (seconds*1000));
-            document.cookie = nvp + ";expires=" + d.toUTCString();
+            docCookie(nvp + ";expires=" + d.toUTCString());
         }
     }
-    function deleteCookie() {
-        set("", -1);
-
-    }
-    return {value, set, delete: deleteCookie, toString: ()=>{return value().toString()}};
+    return {value, set, delete: ()=>{return set("",0)}, toString: ()=>{return value().toString()}};
 }
