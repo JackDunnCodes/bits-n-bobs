@@ -27,17 +27,18 @@ function cookie(name) {
      * @param {number} seconds 
      */
     function set(value, seconds = undefined) {
+        const nvp =name + "=" + value+ ";path=/";
         if(seconds === undefined) {
-            document.cookie = name + "=" + value+";path=/";
+            document.cookie = nvp ;
         } else {
             const d = new Date();
             d.setTime(d.getTime() + (seconds*1000));
-            document.cookie = name + "=" + value + ";expires=" + d.toUTCString() + ";path=/";
+            document.cookie = nvp + ";expires=" + d.toUTCString();
         }
     }
     function deleteCookie() {
         set("", -1);
 
     }
-    return {value, set, delete: deleteCookie, toString: value().toString()};
+    return {value, set, delete: deleteCookie, toString: ()=>{return value().toString()}};
 }
