@@ -1,5 +1,5 @@
 /**
- * Initialise a cookie object
+ * Initialise a cookie object. Minifies to less than 490 bytes!
  * @param {string} name 
  * @author Jack Dunn <https://github.com/JackDunnCodes>
  * @license MPL-2.0
