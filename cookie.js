@@ -32,9 +32,7 @@ function cookie(name) {
         if(seconds === null) {
             _docCookie(nvp);
         } else {
-            const d = new Date();
-            d.setTime(d.getTime() + (seconds*1000));
-            _docCookie(nvp + ";expires=" + d.toUTCString());
+            _docCookie(nvp + ";expires=" + (new Date(Date.now()+ (seconds*1000))).toUTCString());
         }
     }
     return {value, set, delete: ()=>{return set("",0)}, toString:value};
