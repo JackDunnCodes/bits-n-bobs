@@ -13,7 +13,7 @@ function cookie(name) {
     let value = () => {
         let cookieString = decodeURIComponent(document.cookie);
         let cookies = cookieString.split(';');
-        for(let i = 0; i <cookies.length; i++) {
+        for(let i in cookies) {
             let cookie = cookies[i].trim().split('=');
             let cookieName = cookie[0];
             if (cookieName === name) {
