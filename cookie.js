@@ -37,5 +37,5 @@ function cookie(name) {
             docCookie(nvp + ";expires=" + d.toUTCString());
         }
     }
-    return {value, set, delete: ()=>{return set("",0)}, toString: ()=>{return value().toString()}};
+    return {value, set, delete: ()=>{return set("",0)}, toString:value};
 }
