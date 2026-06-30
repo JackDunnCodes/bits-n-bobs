@@ -5,12 +5,12 @@
  * @license MPL-2.0
  */
 function cookie(name) {
-  let docCookie = (value) => {return document.cookie=value}
+  let _docCookie = (value) => {return document.cookie=value}
     /**
      * Get the value of this cookie
      * @returns The cookie value
      */
-    function value() {
+    let value = () => {
         let cookieString = decodeURIComponent(document.cookie);
         let cookies = cookieString.split(';');
         for(let i = 0; i <cookies.length; i++) {
@@ -27,14 +27,14 @@ function cookie(name) {
      * @param {*} value 
      * @param {number} seconds 
      */
-    function set(value, seconds = null) {
+    let set = (value, seconds = null) => {
         const nvp =name + "=" + value+ ";path=/";
         if(seconds === null) {
-            docCookie(nvp);
+            _docCookie(nvp);
         } else {
             const d = new Date();
             d.setTime(d.getTime() + (seconds*1000));
-            docCookie(nvp + ";expires=" + d.toUTCString());
+            _docCookie(nvp + ";expires=" + d.toUTCString());
         }
     }
     return {value, set, delete: ()=>{return set("",0)}, toString:value};
