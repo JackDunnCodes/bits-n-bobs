@@ -1,5 +1,5 @@
 /**
- * Initialise a cookie object. Minifies to less than 410 bytes (312 bytes gzipped)!
+ * Initialise a cookie object. Minifies to less than 400 bytes (307 bytes gzipped)!
  * Note: Don't include as a seperate file and create a bunch of overhead. Just copy-paste into your own JS.
  * @param {string} name 
  * @author Jack Dunn <https://github.com/JackDunnCodes>
@@ -28,14 +28,14 @@ function cookie(name) {
      * @param {*} value 
      * @param {number} seconds 
      */
-    let set = (value, seconds = NaN) => 
-        _docCookie(
+    let set = (value, seconds = NaN) => {
+        return document.cookie =
             name + _eqChar + value + ";path=/"
             + (
                 isNaN(seconds) ? '' : (
                     ";expires=" + (new Date(Date.now() + (seconds*1000))).toUTCString()
                 )
-            )
-        );
+            );
+        }
     return {value, set, delete: ()=>{return set("",0)}, toString:value};
 }
