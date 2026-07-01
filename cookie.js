@@ -1,18 +1,19 @@
 /**
- * Initialise a cookie object. Minifies to less than 400 bytes (307 bytes gzipped)!
+ * Initialise a cookie object. Minifies to less than 400 bytes (303 bytes gzipped)!
  * Note: Don't include as a seperate file and create a bunch of overhead. Just copy-paste into your own JS.
  * @param {string} name 
  * @author Jack Dunn <https://github.com/JackDunnCodes>
  * @license MPL-2.0
  */
 function cookie(name) {
-  let _docCookie = (value) => {return document.cookie=value}, _eqChar = '=';
+  let _eqChar = '=';
+  let _document = document;
     /**
      * Get the value of this cookie
      * @returns The cookie value
      */
     let value = () => {
-        let cookieString = decodeURIComponent(document.cookie);
+        let cookieString = decodeURIComponent(_document.cookie);
         let cookies = cookieString.split(';');
         for(let i in cookies) {
             let cookie = cookies[i].trim().split(_eqChar);
@@ -29,7 +30,7 @@ function cookie(name) {
      * @param {number} seconds 
      */
     let set = (value, seconds = NaN) => {
-        return document.cookie =
+        return _document.cookie =
             name + _eqChar + value + ";path=/"
             + (
                 isNaN(seconds) ? '' : (
