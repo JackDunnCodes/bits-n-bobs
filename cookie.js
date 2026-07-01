@@ -13,7 +13,7 @@ function cookie(name) {
      * @returns The cookie value
      */
     let value = () => {
-        let re = new RegExp(";? *"+nameEquals+"([^;]*)(?:;|$)")
+        let re = new RegExp(";? *"+nameEquals+"([^;]*)(;|$)")
         let match = re.exec(_document.cookie);
         if(match !== null){return decodeURIComponent(match[1])};
     };
