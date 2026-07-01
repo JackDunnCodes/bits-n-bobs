@@ -1,5 +1,5 @@
 /**
- * Initialise a cookie object. Minifies to less than 390 bytes (303 bytes gzipped)!
+ * Initialise a cookie object. Minifies to less than 395 bytes (305 bytes gzipped)!
  * Note: Don't include as a seperate file and create a bunch of overhead. Just copy-paste into your own JS.
  * @param {string} name 
  * @author Jack Dunn <https://github.com/JackDunnCodes>
@@ -15,7 +15,7 @@ function cookie(name) {
     let value = () => {
         let re = new RegExp("(?:; *)?"+nameEquals+"([^;]*)(?:;|$)")
         let match = re.exec(_document.cookie);
-        if(match !== null){decodeURIComponent(match[1])};
+        if(match !== null){return decodeURIComponent(match[1])};
     };
     /**
      * Set the value of the cookie, with an optional timeout.
