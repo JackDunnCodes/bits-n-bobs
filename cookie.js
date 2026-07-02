@@ -1,5 +1,5 @@
 /**
- * Initialise a cookie object. Minifies to less than 395 bytes (305 bytes gzipped)!
+ * Initialise a cookie object. Minifies to 386 bytes (306 bytes gzipped)!
  * Note: Don't include as a seperate file and create a bunch of overhead. Just copy-paste into your own JS.
  * @param {string} name 
  * @author Jack Dunn <https://github.com/JackDunnCodes>
