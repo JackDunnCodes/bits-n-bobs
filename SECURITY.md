@@ -13,3 +13,13 @@ You can report them privately at [https://github.com/JackDunnCodes/bits-n-bobs/s
 If no response within a month, open it as a public issue.
 
 Strongly consider opening the issue publicly immediately anyway. Or writing a PR.
+
+
+-------
+
+**This file is not open source**, thus is not available under, and is expressly excluded from, MPL-2.0 or CC-BY-SA 4.0.
+
+This file is instead licenced exclusively to repositories that directly fork this repo for the express and sole purpose
+of contributing back to this repo, simply to facilitate contributions.
+
+(c) Jack Dunn 2026. All rights reserved.
