@@ -1,12 +1,16 @@
 // ==UserScript==
 // @name         OnlinePHP.io - auto-login via GitHub
 // @namespace    http://github.com/jackdunncodes/
-// @version      2026-07-02
+// @version      2026-07-02.01
 // @description  Premium account keep logging you out? This is for you.
 // @author       Jack Dunn
 // @match        https://onlinephp.io
 // @match        https://onlinephp.io/login
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=onlinephp.io
+// @updateURL    https://github.com/JackDunnCodes/bits-n-bobs/raw/refs/heads/main/onlinephp-autologin.user.js
+// @downloadURL  https://github.com/JackDunnCodes/bits-n-bobs/raw/refs/heads/main/onlinephp-autologin.user.js
+// @supportURL   https://github.com/JackDunnCodes/bits-n-bobs/issues
+// @source       https://github.com/JackDunnCodes/bits-n-bobs/blob/main/onlinephp-autologin.user.js
 // @grant        none
 // @license      MPL-2.0
 // ==/UserScript==
