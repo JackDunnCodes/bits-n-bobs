@@ -1,8 +1,11 @@
 Copyright (c) 2026-present Jack Dunn and contributors. All rights reserved, subject to licenses granted.
 
-Unless otherwise stated, each file in this repo is its own work, and each file is licenced under MPL-2.0.
+Unless otherwise stated, each file in this repo is its own work, and each file is dual-licenced under either
+of MPL-2.0 or CC-BY-SA 4.0. You may freely pick one (and only one) of these licences per work for each of your
+projects, and you may use the work in your project under that licence. You cannot change which licence you use
+for a project without written consent (though you can change which licence you use on different projects).
 
-In summary, (a summary that does not replace the licence and is not legal advice,) you can use these files
+In summary, (a summary that does not replace the licences and is not legal advice,) you can use these files
 freely, including within proprietary works, but modifications you make to the file must be made public, and
 you should include the copyright notice (along with attribution to, at the very least, "Jack Dunn and
 contributors").
