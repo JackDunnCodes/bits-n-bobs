@@ -17,9 +17,9 @@ Strongly consider opening the issue publicly immediately anyway. Or writing a PR
 
 -------
 
-**This file is not open source**, thus is not available under, and is expressly excluded from, MPL-2.0 or CC-BY-SA 4.0.
+<sub>**This file is not open source**, thus is not available under, and is expressly excluded from, MPL-2.0 or CC-BY-SA 4.0.</sub>
 
-This file is instead licenced exclusively to repositories that directly fork this repo for the express and sole purpose
-of contributing back to this repo, simply to facilitate contributions.
+<sub>This file is instead licenced exclusively to repositories that directly fork this repo for the express and sole purpose
+of contributing back to this repo, simply to facilitate contributions.</sub>
 
-(c) Jack Dunn 2026. All rights reserved.
+<sub>(c) Jack Dunn 2026. All rights reserved.</sub>
