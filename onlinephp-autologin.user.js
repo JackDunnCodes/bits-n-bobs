@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnlinePHP.io - auto-login via GitHub
 // @namespace    http://github.com/jackdunncodes/
-// @version      2026-07-06.01
+// @version      2026-07-06.02
 // @description  Premium account keep logging you out? This is for you. PLEASE NOTE - this only works for Github logins. Any others, open a feature request issue :)
 // @author       Jack Dunn
 // @match        https://onlinephp.io
