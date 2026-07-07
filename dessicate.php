@@ -6,13 +6,16 @@
  * @author Jack Dunn <https://github.com/JackDunnCodes>
  * @license MPL-2.0
  */
+
 function dessicate($array) {
 	$count = 0;
 	$data = null;
 	$header = null;
 	foreach ($array as $key => $value) {
 		if(is_null($header)) {
-			$header = pack('S', strlen($data ?? ''));
+			if(strlen($data ?? '') !== 0) {
+				$header = pack('S', strlen($data ?? ''));
+			}
 		} else {
 			$header .= pack('S', strlen($data));
 		}
@@ -72,7 +75,7 @@ function resurrect($data) {
 	$unpack1 = unpack('Slen', $data);
 	$headerlen = $unpack1['len'];
 	$unpack2 = unpack('a'.$headerlen.'header', $data, 2);
-	$header= $unpack2['header'];
+	$header= "\0\0".$unpack2['header'];
 	
 	$pointers=unpack('S*', $header);
 	$array = [];
