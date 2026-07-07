@@ -1,5 +1,9 @@
 <?php
 // https://onlinephp.io/c/b4351
+// Limitations:
+// Max 512 keys
+// Practical max 63KB stored
+// Max key length 256
 
 /**
  * Convert into a hyper-efficient, bit-level storage medium for JSON-like data.
