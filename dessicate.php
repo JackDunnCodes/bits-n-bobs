@@ -41,7 +41,7 @@ function dessicate($array) {
 				-5, -6, -7, -8 => 'Q'
 			};
 			$packFormat = match ($type) {
-				'c', 'C' => 'c',
+				'c', 'C' => 'C',
 				's', 'S' => 'n',
 				'l', 'L' => 'N',
 				'q', 'Q' => 'J'
@@ -92,7 +92,7 @@ function resurrect($data) {
 			case 'q':
 			case 'Q':
 				$packFormat = match ($type) {
-					'c', 'C' => 'c',
+					'c', 'C' => 'C',
 					's', 'S' => 'n',
 					'l', 'L' => 'N',
 					'q', 'Q' => 'J'
