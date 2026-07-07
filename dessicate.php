@@ -1,4 +1,6 @@
 <?php
+// https://onlinephp.io/c/b4351
+
 /**
  * Convert into a hyper-efficient, bit-level storage medium for JSON-like data.
  * @author Jack Dunn <https://github.com/JackDunnCodes>
