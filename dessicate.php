@@ -24,9 +24,15 @@ function dessicate($array) {
 			$header .= pack('S', strlen($data));
 		}
 	};
+	$expectIdx=0;
 	foreach ($array as $key => $value) {
 		$appendHeader($header, $data);
-		$keylen = strlen($key);
+		$newKey = $key;
+		if($newKey === $expectIdx) {
+			$expectIdx += 1;
+			$newKey='';
+		}
+		$keylen = strlen($newKey);
 		$type = 'Z';
 		$shipthis = null;
 		if(is_int($value)) {
@@ -68,7 +74,8 @@ function dessicate($array) {
 		if(is_null($shipthis)) {
 			$shipthis = pack("a*", $value);
 		}
-		$pack = pack("CCa" . $keylen, $keylen, ord($type), $key).$shipthis;
+		$preamble = ($keylen > 0) ? pack("CCa" . $keylen, $keylen, ord($type), $key) : pack("CC", 0, ord($type));
+		$pack = $preamble.$shipthis;
 		
 		if(is_null($data)) {
 			$data = $pack;
