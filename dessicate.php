@@ -113,6 +113,7 @@ function resurrect($data) {
 		$type = chr($unpack3['type']);
 		$keyLength = $unpack3['len'];
 		$dataLength = is_null($nextPointer) ? '*' : ($fieldLength - $keyLength -1-1);
+		$key = ($keyLength > 0) ? unpack('a'.$unpack3['len'].'key', $data, 2+$headerlen+$pointer+1+1)['key'] : null;
 		switch($type) {
 			case 'c':
 			case 'C':
@@ -132,36 +133,34 @@ function resurrect($data) {
 					'c','s','l','q' => 1,
 					'C','S','L','Q' => -1
 				};
-				$unpack4 =unpack('a'.$unpack3['len'].'key/'.$packFormat.'value', $data, 2+$headerlen+$pointer+1+1);
-				$key = $unpack4['key'];
+				$unpack4 =unpack($packFormat.'value', $data, 2+$headerlen+$pointer+1+1+$keyLength);
 				$value = $unpack4['value'];
 				break;
 			case 'f':
-				$unpack4 = unpack('a'.$unpack3['len'].'key/Gvalue', $data, 2+$headerlen+$pointer+1+1);
-				$key = $unpack4['key'];
+				$unpack4 = unpack('Gvalue', $data, 2+$headerlen+$pointer+1+1+$keyLength);
 				$value = $unpack4['value'];
 				break;
 			case 'T':
 			case 'F':
-				$unpack4 = unpack('a'.$unpack3['len'].'key', $data, 2+$headerlen+$pointer+1+1);
-				$key = $unpack4['key'];
 				$value = match ($type) {
 					'T' => true,
 					'F' => false
 				};
 				break;
 			case 'D':
-				$unpack4 = unpack('a'.$unpack3['len'].'key/a'.$dataLength.'value', $data, 2+$headerlen+$pointer+1+1);
-				$key = $unpack4['key'];
+				$unpack4 = unpack('a'.$dataLength.'value', $data, 2+$headerlen+$pointer+1+1+$keyLength);
 				$value = resurrect($unpack4['value']);
 				break;
 			case 'Z':
 			default:
-				$unpack4 = unpack('a'.$unpack3['len'].'key/a'.$dataLength.'value', $data, 2+$headerlen+$pointer+1+1);
-				$key = $unpack4['key'];
+				$unpack4 = unpack('a'.$dataLength.'value', $data, 2+$headerlen+$pointer+1+1+$keyLength);
 				$value = $unpack4['value'];
 		}
-		$array[$key] = $value;
+		if(is_null($key)) {
+			$array[] = $value;
+		} else {
+			$array[$key] = $value;
+		}
 	}
 	return $array;
 }
