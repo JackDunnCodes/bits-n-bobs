@@ -165,5 +165,3 @@ function resurrect($data) {
 	}
 	return $array;
 }
-	return $array;
-}
