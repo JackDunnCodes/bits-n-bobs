@@ -11,6 +11,12 @@
  * @license MPL-2.0
  */
 
+/**
+ * Convert into a hyper-efficient, bit-level storage medium for JSON-like data.
+ * @author Jack Dunn <https://github.com/JackDunnCodes>
+ * @license MPL-2.0
+ */
+
 function dessicate($array) {
 	$count = 0;
 	$data = null;
@@ -92,15 +98,23 @@ function resurrect($data) {
 	if($headerlen>0){
 		$unpack2 = unpack('a'.$headerlen.'header', $data, 2);
 		$header= "\0\0".$unpack2['header'];
+		$pointers=array_values(unpack('S*', $header));
 	}else{
 		$header="\0\0";
+		$pointers=[0];
 	}
 	
-	$pointers=unpack('S*', $header);
+	
 	$array = [];
-	foreach($pointers as $pointer) {
+	for($i=0;$i<count($pointers);$i++) {
+		$pointer = $pointers[$i];
+		$nextPointer = $pointers[$i+1] ?? null;
+		$fieldLength = is_null($nextPointer) ? null : $nextPointer-$pointer;
+		
 		$unpack3 = unpack('Clen/Ctype', $data, 2+$headerlen+$pointer);
 		$type = chr($unpack3['type']);
+		$keyLength = $unpack3['len'];
+		$dataLength = is_null($nextPointer) ? '*' : ($fieldLength - $keyLength -1-1);
 		switch($type) {
 			case 'c':
 			case 'C':
@@ -139,13 +153,13 @@ function resurrect($data) {
 				};
 				break;
 			case 'D':
-				$unpack4 = unpack('a'.$unpack3['len'].'key/Z*value', $data, 2+$headerlen+$pointer+1+1);
+				$unpack4 = unpack('a'.$unpack3['len'].'key/a'.$dataLength.'value', $data, 2+$headerlen+$pointer+1+1);
 				$key = $unpack4['key'];
 				$value = resurrect($unpack4['value']);
 				break;
 			case 'Z':
 			default:
-				$unpack4 = unpack('a'.$unpack3['len'].'key/Z*value', $data, 2+$headerlen+$pointer+1+1);
+				$unpack4 = unpack('a'.$unpack3['len'].'key/Z'.$dataLength.'value', $data, 2+$headerlen+$pointer+1+1);
 				$key = $unpack4['key'];
 				$value = $unpack4['value'];
 		}
