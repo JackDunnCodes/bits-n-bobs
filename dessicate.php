@@ -11,17 +11,11 @@
  * @license MPL-2.0
  */
 
-/**
- * Convert into a hyper-efficient, bit-level storage medium for JSON-like data.
- * @author Jack Dunn <https://github.com/JackDunnCodes>
- * @license MPL-2.0
- */
-
 function dessicate($array) {
 	$count = 0;
 	$data = null;
 	$header = null;
-	foreach ($array as $key => $value) {
+	$appendHeader = function (&$header, $data) {
 		if(is_null($header)) {
 			if(strlen($data ?? '') !== 0) {
 				$header = pack('S', strlen($data ?? ''));
@@ -29,6 +23,9 @@ function dessicate($array) {
 		} else {
 			$header .= pack('S', strlen($data));
 		}
+	};
+	foreach ($array as $key => $value) {
+		$appendHeader($header, $data);
 		$keylen = strlen($key);
 		$type = 'Z';
 		$shipthis = null;
@@ -62,14 +59,14 @@ function dessicate($array) {
 			$shipthis = pack('G', $value);
 		} elseif(is_array($value)) {
 			$type = 'D';
-			$shipthis = pack("Z*", dessicate($value));
+			$shipthis = pack("a*", dessicate($value));
 		}
 		if(is_bool($value)) {
 			$type = $value ? 'T':'F';
 			$shipthis = '';
 		}
 		if(is_null($shipthis)) {
-			$shipthis = pack("Z*", $value);
+			$shipthis = pack("a*", $value);
 		}
 		$pack = pack("CCa" . $keylen, $keylen, ord($type), $key).$shipthis;
 		
@@ -79,6 +76,7 @@ function dessicate($array) {
 			$data .= $pack;
 		}
 	}
+	$appendHeader($header, $data);
 	$return = pack('S', strlen($header??""));
 	if(!empty($header)) {
 		$return .= $header;
@@ -106,7 +104,7 @@ function resurrect($data) {
 	
 	
 	$array = [];
-	for($i=0;$i<count($pointers);$i++) {
+	for($i=0;$i<(count($pointers)-1);$i++) {
 		$pointer = $pointers[$i];
 		$nextPointer = $pointers[$i+1] ?? null;
 		$fieldLength = is_null($nextPointer) ? null : $nextPointer-$pointer;
@@ -159,11 +157,13 @@ function resurrect($data) {
 				break;
 			case 'Z':
 			default:
-				$unpack4 = unpack('a'.$unpack3['len'].'key/Z'.$dataLength.'value', $data, 2+$headerlen+$pointer+1+1);
+				$unpack4 = unpack('a'.$unpack3['len'].'key/a'.$dataLength.'value', $data, 2+$headerlen+$pointer+1+1);
 				$key = $unpack4['key'];
 				$value = $unpack4['value'];
 		}
 		$array[$key] = $value;
 	}
+	return $array;
+}
 	return $array;
 }
