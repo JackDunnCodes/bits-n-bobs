@@ -1,7 +1,7 @@
 <?php
 // https://onlinephp.io/c/b4351
 // Limitations:
-// Absolute max 32,767 keys (we suggest no more than 512)
+// Absolute max 32,767 keys (we suggest no more than 256)
 // Practical max 60KB of keys & values stored (Absolute max 64KB of keys & values)
 // Absolute max key length 256 characters
 
