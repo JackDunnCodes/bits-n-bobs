@@ -25,7 +25,7 @@ function dessicate($array) {
 		}
 		$keylen = strlen($key);
 		$type = 'Z';
-		$shipthis = pack("Z*", $value);
+		$shipthis = null;
 		if(is_int($value)) {
 			$size = 0;
 			$sizeCheck = $value;
@@ -54,10 +54,16 @@ function dessicate($array) {
 		} elseif(is_float($value)) {
 			$type = 'f';
 			$shipthis = pack('G', $value);
+		} elseif(is_array($value)) {
+			$type = 'D';
+			$shipthis = pack("Z*", dessicate($value));
 		}
 		if(is_bool($value)) {
 			$type = $value ? 'T':'F';
 			$shipthis = '';
+		}
+		if(is_null($shipthis)) {
+			$shipthis = pack("Z*", $value);
 		}
 		$pack = pack("CCa" . $keylen, $keylen, ord($type), $key).$shipthis;
 		
@@ -67,7 +73,12 @@ function dessicate($array) {
 			$data .= $pack;
 		}
 	}
-	return trim(pack('S', strlen($header)) . $header . $data,'\0');
+	$return = pack('S', strlen($header??""));
+	if(!empty($header)) {
+		$return .= $header;
+	}
+	$return .= rtrim($data, '\0');
+	return $return;
 }
 
 /**
@@ -78,8 +89,12 @@ function dessicate($array) {
 function resurrect($data) {
 	$unpack1 = unpack('Slen', $data);
 	$headerlen = $unpack1['len'];
-	$unpack2 = unpack('a'.$headerlen.'header', $data, 2);
-	$header= "\0\0".$unpack2['header'];
+	if($headerlen>0){
+		$unpack2 = unpack('a'.$headerlen.'header', $data, 2);
+		$header= "\0\0".$unpack2['header'];
+	}else{
+		$header="\0\0";
+	}
 	
 	$pointers=unpack('S*', $header);
 	$array = [];
@@ -122,6 +137,11 @@ function resurrect($data) {
 					'T' => true,
 					'F' => false
 				};
+				break;
+			case 'D':
+				$unpack4 = unpack('a'.$unpack3['len'].'key/Z*value', $data, 2+$headerlen+$pointer+1+1);
+				$key = $unpack4['key'];
+				$value = resurrect($unpack4['value']);
 				break;
 			case 'Z':
 			default:
