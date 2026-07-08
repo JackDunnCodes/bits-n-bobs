@@ -4,14 +4,23 @@ about: For problems and errors
 title: ''
 labels: bug
 assignees: JackDunnCodes
-
+body:
+- type: input
+  id: which
+  attributes:
+    label: Which file/project is this issue related to?
+    description: "There's multiple projects in this repo. I need to know what one you're using"
+    placeholder: "e.g. moreuniqid.php, onlinephp-autologin.user.js"
+  validations:
+    required: true
+- type: textarea
+  id: describe
+  attributes:
+    label: Describe the bug
+    description: "A clear and concise description of what the bug is."
+  validations:
+    required: true
 ---
-
-**Which file/project is this issue related to?**
-<!--There's multiple projects in this repo. I need to know what one you're using-->
-
-**Describe the bug**
-<!--A clear and concise description of what the bug is. -->
 
 **To Reproduce**
 <!-- Step by step guide to reproduce the behavior -->
