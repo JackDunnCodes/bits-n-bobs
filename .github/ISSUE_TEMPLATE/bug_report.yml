@@ -46,9 +46,10 @@ body:
   attributes:
     label: What device did this happen on?
     value: |
-      Desktop or mobile?: |
-      OS and version: |
-      Browser and browser version?: |
+      Desktop, mobile, or server:
+      Which OS and version:
+      Which browser or software:
+      Which version of the browser/software:
   validations:
     required: true
 - type: textarea
