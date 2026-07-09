@@ -20,7 +20,7 @@ body:
   validations:
     required: true
 - type: textarea
-  id: describe
+  id: reproduce
   attributes:
     label: Reproduction steps
     description: "How can I reproduce the bug? Provide a step-by-step guide on how you got the problem."
