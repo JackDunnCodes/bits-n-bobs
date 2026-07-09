@@ -1,0 +1,36 @@
+
+name: Feature request
+description: Suggest an idea for this project
+labels: enhancement
+assignees: ''
+body:
+- type: input
+  id: which
+  attributes:
+    label: Which file/project is this issue related to?
+    description: "There's multiple projects in this repo. I need to know what one you're using"
+    placeholder: "e.g. moreuniqid.php, onlinephp-autologin.user.js"
+  validations:
+    required: true
+- type: textarea
+  id: problem
+  attributes:
+    label: Is your feature request related to a problem? Please describe.
+    description: "A clear and concise description of what the problem is. E.g. I'm always frustrated when..."
+- type: textarea
+  id: solution
+  attributes:
+    label: Describe the feature or solution you'd like
+    description: "A clear and concise description of what you want to happen."
+  validations:
+    required: true
+- type: textarea
+  id: alternatives
+  attributes:
+    label: Have you considered or tried any alternatives? Describe them.
+    placeholder: "I tried to... but it wasn't effective because... I considered... but it wouldn't work for me because..."
+- type: textarea
+  id: context
+  attributes:
+    label: Anything else we should know?
+    description: Any additional context that may be useful or relevant that you haven't covered above.
