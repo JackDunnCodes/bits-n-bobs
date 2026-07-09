@@ -1,7 +1,6 @@
 
 name: Bug report
-about: For problems and errors
-title: ''
+description: For problems and errors
 labels: bug
 assignees: JackDunnCodes
 body:
